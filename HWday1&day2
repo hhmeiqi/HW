@@ -1,0 +1,146 @@
+Homework Day1
+1. select ProductID,Name,Color,ListPrice from production.Product
+2. select ProductID,Name,Color,ListPrice from production.Product where ListPrice = 0
+3. select ProductID,Name,Color,ListPrice from production.Product where Color is null
+4. select ProductID,Name,Color,ListPrice from production.Product where Color is not null
+5. select ProductID,Name,Color,ListPrice from production.Product where Color is not null and ListPrice > 0
+6. select Name + Color,ListPrice from production.Product where Color is not null 
+7. select 'NAME:' + Name + ' -- COLOR: ' + Color "Name And Color" ,ListPrice from production.Product where Color is not null 
+8. select ProductID, Name from Production.Product where ProductID between 400 and 500
+9. select ProductID, Name, Color from Production.Product where color = 'black' or color = 'red'
+10. select NAME from Production.Product WHERE NAME LIKE 'S%'
+11.select NAME, ListPrice from Production.Product  WHERE NAME LIKE 'S%' ORDER BY NAME 
+12. select NAME, ListPrice from Production.Product  WHERE NAME  LIKE '[A,S]%' ORDER BY NAME
+13. select NAME, ListPrice from Production.Product WHERE NAME LIKE 'SPO%' AND NOT NAME LIKE '%K%' ORDER BY NAME
+14. select DISTINCT Color from Production.Product ORDER BY COLOR DESC
+15. SELECT ProductSubcategoryID,Color From Production.Product Where ProductSubcategoryID is not null and Color is not null Group by ProductSubcategoryID,Color
+16. SELECT ProductSubCategoryID, LEFT([Name],35) AS [Name], Color, ListPrice 
+	FROM Production.Product
+	WHERE (ListPrice BETWEEN 1000 AND 2000 AND ProductSubCategoryID = 1 ) or Color Not IN ('Red','Black') 
+	ORDER BY ProductID
+17. 	SELECT p.ProductSubCategoryID, p.Name, p.Color,p.ListPrice
+	FROM Production.Product p left join (Select ProductSubCategoryID, max(ListPrice) "MaxPrice" from Production.Product
+	Group by ProductSubCategoryID) as sub on p.ProductSubcategoryID =sub.ProductSubcategoryID
+    WHERE p.ProductSubcategoryID is not null and p.ProductSubcategoryID < =14 AND COLOR IS NOT NULL and p.ListPrice = sub.MaxPrice
+	order by p.ProductSubcategoryID desc
+
+Homework Day2
+Section one Answer following questions
+1. Result set is a set of data, could be empty or not, returned by a select statement, or a stored procedure, that is saved in RAM or displayed on the screen.
+2. UNION and UNION ALL are SQL operators used to concatenate 2 or more result sets. This allows us to write multiple SELECT statements, retrieve the desired results, then combine them together into a final, unified set.
+	The main difference between UNION and UNION ALL is that:
+	UNION: only keeps unique records
+	UNION ALL: keeps all records, including duplicates
+3. Set operators are combines the 2 or more query result sets and then produces a single result set based on the operator.
+	There are the following 3 set operators in SQL Server:
+	UNION
+	INTERSECT
+	EXCEPT
+4. JOIN in SQL is used to combine data from many tables based on a matched condition between them. The data combined using JOIN statement results into new columns.
+	Union is a set operator that can be used to combine the result set of two different SELECT statement. In the union number of columns and data type should be the same. 
+5. FULL JOIN: is used to fetch all the records from both left and right table and for extra records from both tables will return null;
+   INNER JOIN: is used to fetch the data from left and right table which satisfy the join condition.
+outer join
+6. LEFT JOIN is a type of outer join. There are three types of outer join which are left outer join, right outer join and full outer join
+7. A cross join returns the Cartesian product of the sets of records from the two joined tables. Thus, it equates to an inner join where the join-condition always evaluates to True.
+8. WHERE Clause is used to filter the records from the table or used while joining more than one table.Only those records will be extracted who are satisfying the specified condition in WHERE clause. It can be used with SELECT, UPDATE, DELETE statements. 
+	HAVING Clause is used to filter the records from the groups based on the given condition in the HAVING Clause. Those groups who will satisfy the given condition will appear in the final result. HAVING Clause can only be used 
+with SELECT statement. 
+9. Yes, you can group by multiple columns
+
+Section two Write queries for following scenarios
+1. select COUNT(PRODUCTID) from production.Product
+2. select COUNT(PRODUCTID) "CountedProducts" from production.Product WHERE ProductSubcategoryID IS NOT NULL
+3. select DISTINCT ProductSubcategoryID, COUNT(PRODUCTID) "CountedProducts" from production.Product WHERE ProductSubcategoryID IS NOT NULL
+GROUP BY ProductSubcategoryID
+4. select COUNT(PRODUCTID) "CountedProducts" from production.Product WHERE ProductSubcategoryID IS NULL
+5. select ProductID, sum(Quantity) from production.ProductInventory group by ProductID
+6. select ProductID, sum(Quantity) "TheSum" from production.ProductInventory 
+	where LocationID = 40
+	group by ProductID
+	having sum(Quantity) < 100
+7. select Shelf,ProductID, sum(Quantity) "TheSum" from production.ProductInventory 
+	where LocationID = 40
+	group by ProductID,Shelf
+	having sum(Quantity) < 100
+8. select ProductID, AVG(Quantity) "TheAvg" from production.ProductInventory 
+	where LocationID = 10
+	group by ProductID
+9. select ProductID, Shelf, AVG(Quantity) "TheAvg" from production.ProductInventory 
+	where LocationID = 10
+	group by ProductID,Shelf
+10. select ProductID, Shelf, AVG(Quantity) "TheAvg" from production.ProductInventory 
+	where LocationID = 10 and Shelf <> 'N/A'
+	group by ProductID,Shelf
+11. select Color,Class,Count(ProductID) "TheCount", Avg(ListPrice) "AvgPrice" from Production.Product
+	where Color is not null and Class is not null
+	Group by Color,Class
+12. Select c.Name "Country", s.Name "Province"
+	from person. StateProvince s left join Person.CountryRegion c
+	on s.CountryRegionCode = c.CountryRegionCode
+13. Select c.Name "Country", s.Name "Province"
+	from person. StateProvince s left join Person.CountryRegion c
+	on s.CountryRegionCode = c.CountryRegionCode
+	where c.Name in ('Germany','Canada')
+14.  Select distinct ProductID from [Order Details]
+15.  Select TOP 5 Count(OrderID) "TotalOrders" ,ShipPostalCode from Orders
+	WHERE ShipPostalCode is not null
+	group by ShipPostalCode
+	ORDER BY TotalOrders DESC
+16.  Select TOP 5 Count(OrderID) "TotalOrders" ,ShipPostalCode from Orders
+	WHERE ShipPostalCode is not null and OrderDate > '1977-11-11 00:00:00.000'
+	group by ShipPostalCode
+	ORDER BY TotalOrders DESC
+17.  select COUNT(CustomerID) "NumOfCus", City from Customers
+	Group by City
+	Order by NumOfCus desc
+18.  select COUNT(CustomerID) "NumOfCus", City from Customers
+	Group by City
+	Having COUNT(CustomerID) > 10
+19.  Select  Distinct c.CompanyName
+	FROM Customers c RIGHT JOIN Orders od ON c.CustomerID = od.CustomerID
+	WHERE OrderDate > '1998-1-1 00:00:00.000'
+20.  Select   c.CompanyName, od.OrderDate
+	FROM Customers c RIGHT JOIN Orders od ON c.CustomerID = od.CustomerID
+	Order by OrderDate desc
+21.  Select   c.CompanyName, sum(odt.Quantity) "Count"
+	FROM Customers c RIGHT JOIN Orders od ON c.CustomerID = od.CustomerID left join [Order Details] odt on od.OrderID = odt.OrderID
+	group by c.CompanyName
+22.  Select   c.CustomerID, sum(odt.Quantity) "Count"
+	FROM Customers c RIGHT JOIN Orders od ON c.CustomerID = od.CustomerID left join [Order Details] odt on od.OrderID = odt.OrderID
+	group by c.CustomerID
+	Having sum(odt.Quantity) > 100
+23.  select Distinct s.CompanyName "SupplierComName",sp. CompanyName "ShippingComName" from suppliers s right join Products p on s.SupplierID = p.SupplierID left join [Order Details] odt on p.ProductID = odt.ProductID
+	left join orders od on odt.OrderID = od.OrderID left join Shippers sp on od.ShipVia = sp.ShipperID
+24.  Select   od.OrderDate,p.ProductName
+	from Products p right join [Order Details] odt on p.ProductID = odt.ProductID right join Orders od on odt.OrderID = od.OrderID
+25. SELECT e1.EmployeeID,e1.LastName,e1.FirstName,e1.Title,e2.EmployeeID,e2.LastName,e2.FirstName,e2.Title
+	FROM Employees e1, Employees e2
+	WHERE e1.Title = e2.Title AND e1.EmployeeID <> e2.EmployeeID
+26. SELECT Count(e2.EmployeeID),e2.LastName,e2.FirstName,e2.Title
+	FROM Employees e1 left join Employees e2 on e1.ReportsTo = e2.EmployeeID
+	where e2.Title is not null
+	group by e2.LastName,e2.FirstName,e2.Title
+27. 
+28. 
+29.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
