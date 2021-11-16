@@ -1,0 +1,56 @@
+Answer following questions
+1. What is View? What are the benefits of using views?
+A view is a virtual table whose contents are defined by a query. Like a real table, a view consists of a set of named columns and rows of data
+The benefits of using views:
+To Simplify Data Manipulation: Views can simplify how users work with data. 
+You can define frequently used joins, projections, UNION queries, and SELECT queries as views 
+so that users do not have to specify all the conditions and qualifications every time an additional operation is performed on that data 
+Views enable you to create a backward compatible interface for a table when its schema changes. 
+To Customize Data: Views let different users to see data in different ways, even when they are using the same data at the same time. 
+
+2. Can data be modified through views?
+Yes.
+
+3. What is stored procedure and what are the benefits of using it?
+A Stored Procedure is a type of code in SQL that can be stored for later use and can be used many times. 
+Stored procedure can centralize your Transact- SQL code, increase
+database security and have faster execution. Use stored procedure also can reduce the
+network traffic and encourage code reusability.
+
+4. What is the difference between view and stored procedure?
+A view represents a virtual table. You can join multiple tables in a view and use the view to present the data 
+as if the data were coming from a single table.
+A stored procedure uses parameters to do a function whether it is updating and inserting data, or returning single values 
+or data sets.
+
+5. What is the difference between stored procedure and functions?
+The function must return a value but in Stored Procedure it is optional, it can returns single or multiple values.
+We can use transaction in SP. But cannot use transaction in function.
+Functions can have only input parameters for it whereas Procedures can have input or output parameters.
+Functions can be called from Procedure whereas Procedures cannot be called from a Function.
+
+6. Can stored procedure return multiple result sets?
+Yes.
+
+7. Can stored procedure be executed as part of SELECT Statement? Why?
+No. Because procedures are not allowed in sql statements.
+
+8. What is Trigger? What types of Triggers are there?
+Triggers are a special type of stored procedure that get executed (fired) when a specific event happens.
+Types: DDL triggers, DML triggers, Logon triggers.
+
+9. What are the scenarios to use Triggers?
+a.Enforce Integrity beyond simple Referential Integrity
+b.Implement business rules
+c.Maintain audit record of changes
+d.Accomplish cascading updates and deletes
+
+10. What is the difference between Trigger and Stored Procedure?
+We can execute a stored procedure whenever we want with the help of the exec command, but a trigger can only 
+be executed whenever an event (insert, delete, and update) is fired on the table on which the trigger is defined.
+Stored procedure can take input parameters, but we can't pass parameters as input to a trigger.
+Stored procedures can return values but a trigger cannot return a value.
+We can use transaction statements like begin transaction, commit transaction, and rollback inside a stored procedure 
+but we can't use transaction statements inside a trigger
+We can call a stored procedure from the front end (.asp files, .aspx files, .ascx files, etc.) but we can't call a trigger from these files.
+
