@@ -1,0 +1,100 @@
+Answer following questions
+1.	What is an object in SQL?
+
+2.What is Index? What are the advantages and disadvantages of using Indexes?
+Indexes are database objects based on table column for faster retrieval of data
+Advantages:
+To quickly find data that satisfy conditions in the WHERE clause.
+To find matching rows in the JOIN clause.
+To maintain uniqueness of key column during INSERT and UPDATE.
+To Sort, Aggregate and Group data.
+disadvantages:
+Additional Disk Space
+Insert, Update, Delete Statement become slow
+
+3.What are the types of Indexes?
+Clustered Index Non-clustered Index 
+
+4.Does SQL Server automatically create indexes when a table is created? If yes, under which constraints?
+Yes. Under primary key constraint and unique constraint.A clustered index automatically created when a primary key is created
+a nonclustered index is created by default when unique constraint is applied
+
+5.Can a table have multiple clustered index? Why?
+No. There can be only one clustered index per table, because the data rows themselves can be stored in only one order. 
+The only time the data rows in a table are stored in sorted order is when the table contains a clustered index.
+
+6.Can an index be created on multiple columns? Is yes, is the order of columns matter?
+Yes. An index can be created on multiple columns.
+No, the order does not matter. Each column is considered individually.
+
+7.Can indexes be created on views?
+Yes. 
+Indexes can only be created on views which have the same owner as the referenced table or tables. 
+This is also called an intact ownership-chain between the view and the table(s). 
+Typically, when table and view reside within the same schema, the same schema-owner applies to 
+all objects within the schema.
+
+8.What is normalization? What are the steps (normal forms) to achieve normalization?
+Database Normalization is a process of organizing data to minimize redundancy (data duplication),
+ which in turn ensures data consistency. Normalization has a series of steps called “Forms”, 
+the more steps you take the more normalized your tables are.
+There are four steps: first normal form, second normal form, third
+normal form and BCNF.
+
+9.What is denormalization and under which scenarios can it be preferable?
+Denormalization is a database optimization technique in which we add redundant data to one or more tables. 
+This can help us avoid costly joins in a relational database. 
+
+10.How do you achieve Data Integrity in SQL Server?
+Data integrity is the overall completeness, accuracy and consistency of data.
+Data integrity is usually imposed during the database design phase through the use of standard procedures and rules. 
+It is maintained through the use of various error-checking methods and validation procedures.
+
+11. What are the different kinds of constraint do SQL Server have?
+NOT NULL Constraint.
+UNIQUE Constraint.
+DEFAULT Constraint.
+CHECK Constraint.
+PRIMARY KEY Constraint.
+FOREIGN KEY Constraint.
+
+12. What is the difference between Primary Key and Unique Key?
+--1. unique constraint allows one null value but primary key does not
+--2. a table can have multiple unique constraints but only one primary 
+--3. unique constraint doesnt sort the data but primary key sorts
+-- primary key will sort the result set based on the column where you applied primary key 
+--4. unique constraint by default creates non clustered index but primary key creates clustered index
+
+13. What is foreign key?
+A foreign keyis a field (or collection of fields) in one table, that refers to the primary key in another table.
+
+14. Can a table have multiple foreign keys?
+Yes. A table can have multiple foreign keys
+
+15. Does a foreign key have to be unique? Can it be null?
+No. It doesnt have to be unique and yest it can be null.
+
+16. Can we create indexes on Table Variables or Temporary Tables?
+Indexes cannot be created on table variables, but can be created on temporary tables.
+
+17. What is Transaction? What types of transaction levels are there in SQL Server?
+Transactions by definition are a logical unit of work  
+Transaction is a single recoverable unit of work that executes either:Completely,or Not at all
+The different Isolation Levels are:
+Read Uncommitted (Lowest level)
+Read Committed
+Repeatable Read
+Serializable (Highest Level)
+Snapshot Isolation
+
+
+
+
+
+
+
+
+
+
+
+
